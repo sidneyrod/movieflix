@@ -9,22 +9,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_role")
-public class Role implements Serializable {
+@Table(name = "tb_review")
+public class Review implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String authority;
-	
-	public Role() {
+	private String text;
+
+	public Review() {
 	}
 
-	public Role(Long id, String authority) {
+	public Review(Long id, String text) {
 		this.id = id;
-		this.authority = authority;
+		this.text = text;
 	}
 
 	public Long getId() {
@@ -35,12 +35,12 @@ public class Role implements Serializable {
 		this.id = id;
 	}
 
-	public String getAuthority() {
-		return authority;
+	public String getText() {
+		return text;
 	}
 
-	public void setAuthority(String authority) {
-		this.authority = authority;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class Role implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Role other = (Role) obj;
+		Review other = (Review) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -68,4 +68,3 @@ public class Role implements Serializable {
 		return true;
 	}
 }
-

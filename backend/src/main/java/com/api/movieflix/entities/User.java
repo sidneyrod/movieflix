@@ -2,6 +2,7 @@ package com.api.movieflix.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,10 @@ public class User implements Serializable {
 	private Long id;
 	
 	private String name;
+	
+	@Column(unique = true)
 	private String email;
+	
 	private String password;
 	
 	public User() {
