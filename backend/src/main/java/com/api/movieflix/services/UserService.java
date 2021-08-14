@@ -1,6 +1,7 @@
 package com.api.movieflix.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,14 @@ public class UserService {
 	
 	@Transactional(readOnly = true)
 	public List<UserDTO> findAll() {
-		List<User> users = repository.findAll();
-		return users.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+		List<User> list = repository.findAll();
+		return list.stream().map(users -> new UserDTO(users)).collect(Collectors.toList());
+	}
+
+	@Transactional(readOnly = true)
+	public UserDTO findById(Long id) {
+		Optional<User> obj = repository.findById(id);
+		User user = obj.get();
+		return new UserDTO(user);
 	}
 }
