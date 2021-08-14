@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.api.movieflix.dto.UserDTO;
 import com.api.movieflix.entities.User;
 import com.api.movieflix.repositories.UserRepository;
+import com.api.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -27,7 +28,7 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		User user = obj.get();
+		User user = obj.orElseThrow(() -> new ResourceNotFoundException("Id " + id + " not found"));
 		return new UserDTO(user);
 	}
 }
