@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.movieflix.entities.User;
+import com.api.movieflix.dto.UserDTO;
 import com.api.movieflix.services.UserService;
 
 @RestController
@@ -19,8 +19,8 @@ public class UserResource {
 	private UserService service;
 	
 	@GetMapping
-	private ResponseEntity<List<User>> findAll() {
-		List<User> users = service.findAll();
+	private ResponseEntity<List<UserDTO>> findAll() {
+		List<UserDTO> users = service.findAll();
 		return ResponseEntity.ok().body(users);
 	}
 
