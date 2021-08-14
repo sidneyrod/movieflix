@@ -31,4 +31,16 @@ public class UserService {
 		User user = obj.orElseThrow(() -> new ResourceNotFoundException("Id " + id + " not found"));
 		return new UserDTO(user);
 	}
+
+	public UserDTO insert(UserDTO dto) {
+		User user = new User();
+		copyDtoToEntity(dto, user);
+		user = repository.save(user);
+		return new UserDTO(user);
+	}
+	
+	public void copyDtoToEntity(UserDTO dto, User entity) {
+		entity.setName(dto.getName());
+		entity.setEmail(dto.getEmail());
+	}
 }
