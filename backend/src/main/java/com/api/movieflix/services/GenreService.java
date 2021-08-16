@@ -1,6 +1,7 @@
 package com.api.movieflix.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.api.movieflix.dto.GenreDTO;
 import com.api.movieflix.entities.Genre;
 import com.api.movieflix.repositories.GenreRepository;
+import com.api.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class GenreService {
@@ -22,5 +24,11 @@ public class GenreService {
 		List<Genre> genres = repository.findAll();
 		return genres.stream().map(genre -> new GenreDTO(genre)).collect(Collectors.toList());
 	}
-
+	
+	@Transactional(readOnly = true)
+	public GenreDTO findById(Long id) {
+		Optional<Genre> obj = repository.findById(id);
+		Genre genre = obj.orElseThrow(() -> new ResourceNotFoundException("Genre not found"));
+		return new GenreDTO(genre);
+	}
 }
