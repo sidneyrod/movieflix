@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.api.movieflix.dto.RoleDTO;
 import com.api.movieflix.dto.UserDTO;
 import com.api.movieflix.dto.UserInsertDTO;
+import com.api.movieflix.dto.UserUpdateDTO;
 import com.api.movieflix.entities.Role;
 import com.api.movieflix.entities.User;
 import com.api.movieflix.repositories.RoleRepository;
@@ -65,7 +66,7 @@ public class UserService {
 	}
 	
 	@Transactional
-	public UserDTO update(Long id, UserDTO dto) {
+	public UserDTO update(Long id, UserUpdateDTO dto) {
 		try {
 			User user = repository.getOne(id);
 			copyDtoToEntity(dto, user);
