@@ -1,5 +1,7 @@
 package com.api.movieflix.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +13,7 @@ import com.api.movieflix.entities.Genre;
 import com.api.movieflix.entities.Movie;
 import com.api.movieflix.repositories.GenreRepository;
 import com.api.movieflix.repositories.MovieRepository;
+import com.api.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class MovieService {
@@ -26,5 +29,12 @@ public class MovieService {
 		Genre genre = (genreId == 0) ? null : genreRepository.getOne(genreId);
 		Page<Movie> page = repository.find(genre, pageRequest);
 		return page.map(movie -> new MovieDTO(movie));
+	}
+	
+	@Transactional(readOnly = true)
+	public MovieDTO findById(Long id) {
+		Optional<Movie> obj = repository.findById(id);
+		Movie movie = obj.orElseThrow(() -> new ResourceNotFoundException("Movie not found"));
+		return new MovieDTO(movie);
 	}
 }
