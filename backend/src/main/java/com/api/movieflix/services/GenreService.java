@@ -31,4 +31,12 @@ public class GenreService {
 		Genre genre = obj.orElseThrow(() -> new ResourceNotFoundException("Genre not found"));
 		return new GenreDTO(genre);
 	}
+	
+	@Transactional
+	public GenreDTO insert(GenreDTO dto) {
+		Genre genre = new Genre();
+		genre.setName(dto.getName());
+		genre = repository.save(genre);
+		return new GenreDTO(genre);
+	}
 }
