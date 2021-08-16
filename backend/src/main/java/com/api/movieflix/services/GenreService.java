@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,5 +40,18 @@ public class GenreService {
 		genre.setName(dto.getName());
 		genre = repository.save(genre);
 		return new GenreDTO(genre);
+	}
+	
+	@Transactional
+	public GenreDTO update(Long id, GenreDTO dto) {
+		try {
+			Genre genre = repository.getOne(id);
+			genre.setName(dto.getName());
+			genre = repository.save(genre);
+			return new GenreDTO(genre);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id " + id + " not found");
+		}
 	}
 }
