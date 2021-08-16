@@ -2,6 +2,8 @@ package com.api.movieflix.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -50,6 +52,19 @@ public class MovieService {
 		copyDtoToEntity(dto, movie);
 		movie = repository.save(movie);
 		return new MovieDTO(movie);
+	}
+	
+	@Transactional
+	public MovieDTO update(Long id, MovieDTO dto) {
+		try {
+			Movie movie = repository.getOne(id);
+			copyDtoToEntity(dto, movie);
+			movie = repository.save(movie);
+			return new MovieDTO(movie);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id " + id + " not found");
+		}
 	}
 	
 	private void copyDtoToEntity(MovieDTO dto, Movie entity) {
