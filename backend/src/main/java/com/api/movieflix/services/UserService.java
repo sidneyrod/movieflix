@@ -32,7 +32,6 @@ public class UserService {
 	
 	private static Logger logger = org.slf4j.LoggerFactory.getLogger(UserService.class);
 	
-	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
