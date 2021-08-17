@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ import com.api.movieflix.services.exceptions.DatabaseException;
 import com.api.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 	
 	private static Logger logger = org.slf4j.LoggerFactory.getLogger(UserService.class);
 	
@@ -100,7 +101,8 @@ public class UserService {
 			entity.getRoles().add(role);
 		}
 	}
-	
+
+	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = repository.findByEmail(username);
 		if (user == null) {
@@ -110,4 +112,5 @@ public class UserService {
 		logger.info("User found: " + username);
 		return user;
 	}
+
 }
