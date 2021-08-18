@@ -31,13 +31,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
 	
-	private static final String[] VISITOR_AND_MEMBER = { "/movies/**", "reviews/**", "genres/**" };
+	private static final String[] VISITOR_OR_MEMBER = { "/movies/**", "reviews/**", "genres/**" };
 
 	private static final String[] USERS = { "/users/**" };
 
 	private static final String[] CREATE_ACCOUNT = { "/users/**" };	
 	
-	private static final String[] POST_REVIEW = { "/reviews" };
+	private static final String[] POST_PUT_DELETE_REVIEW = { "/reviews" };
 	
 
 	@Override
@@ -55,10 +55,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(VISITOR_AND_MEMBER).hasAnyRole("VISITOR", "MEMBER") 
+		.antMatchers(VISITOR_OR_MEMBER).hasAnyRole("VISITOR", "MEMBER") 
 		.antMatchers(USERS).hasRole("MEMBER")
 		.antMatchers(HttpMethod.POST, CREATE_ACCOUNT).permitAll()
-		.antMatchers(HttpMethod.POST, POST_REVIEW).hasRole("MEMBER")
+		.antMatchers(HttpMethod.POST, POST_PUT_DELETE_REVIEW).hasRole("MEMBER")
+		.antMatchers(HttpMethod.PUT, POST_PUT_DELETE_REVIEW).hasRole("MEMBER")
+		.antMatchers(HttpMethod.DELETE, POST_PUT_DELETE_REVIEW).hasRole("MEMBER")
 		.anyRequest().authenticated();
 		
 		http.cors().configurationSource(corsConfigurationSource());
