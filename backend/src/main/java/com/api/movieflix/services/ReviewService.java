@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -60,6 +62,29 @@ public class ReviewService {
 		review = repository.save(review);
 		
 		return new ReviewDTO(review);
+	}
+	
+	@Transactional
+	public ReviewDTO update(Long id, ReviewDTO dto) {
+		try {
+			Review review = repository.getOne(id);
+			
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			User userAuthenticated = userRepository.findByEmail(authentication.getName());
+			
+			Movie movie = movieRepository.getOne(dto.getMovieId());
+			
+			review.setUser(userAuthenticated);
+			review.setMovie(movie);
+			review.setText(dto.getText());
+			
+			review = repository.save(review);
+			
+			return new ReviewDTO(review);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id " + id + " not found");
+		}
 	}
 	
 }
