@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Movie } from '../../../../core/types/Movie';
 import { makePrivateRequest } from '../../../../core/utils/requests';
-import MovieReview from './components/MovieReview'
+import { getAccessTokenDecoded } from '../../../../core/utils/auth';
+import MovieReview from './components/MovieReview';
 import './styles.scss';
 
 type ParamsType = {
@@ -12,6 +13,7 @@ type ParamsType = {
 const MovieDetails = () => {
   const { movieId } = useParams<ParamsType>();
   const [movie, setMovie] = useState<Movie>();
+  const [hasPermission, setHasPermission] = useState(false);
 
   const getMovies = useCallback(() => {
     makePrivateRequest({ url: `/movies/${movieId}` })
@@ -21,8 +23,11 @@ const MovieDetails = () => {
   }, [movieId]);
 
   useEffect(() => {
+    const currentUser = getAccessTokenDecoded();
+    setHasPermission(currentUser.authorities.toString() === 'ROLE_MEMBER');
+
     getMovies();
-  })
+  }, [getMovies]);
 
   return (
     <div className="movie-details-container">
@@ -41,18 +46,20 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-      <div className="post-new-review-container">
-        <textarea placeholder="Digite aqui sua avaliação" className="new-review-text" />
-        <button className="new-review-button">
-          <span className="new-review-button-text">Salvar avaliação</span>
-        </button>
-      </div>
+      {hasPermission && (
+        <div className="post-new-review-container">
+          <textarea placeholder="Digite aqui sua avaliação" className="new-review-text" />
+          <button className="new-review-button">
+            <span className="new-review-button-text">Salvar avaliação</span>
+          </button>
+        </div>
+      )}
       {movie?.reviews.length !== 0 && (
         <div className="reviews-container">
           {movie?.reviews.map(review => (
-            <MovieReview 
-              review={review} 
-              key={review.id} 
+            <MovieReview
+              review={review}
+              key={review.id}
             />
           ))}
         </div>
