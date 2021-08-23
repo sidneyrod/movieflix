@@ -1,9 +1,10 @@
+import Routes from 'Routes';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <h1>MovieFlix</h1>
-  );
+    <Routes />
+  )
 }
 
 export default App;
