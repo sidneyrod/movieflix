@@ -38,10 +38,6 @@
     margin-top: 50px;
   }
   
-  // .home-right {
-  
-  // }
-  
   .login-form-container {
     display: flex;
     flex-direction: column;
@@ -80,10 +76,10 @@
   
   .login-form-input::placeholder {
     color: var(--lightGray);
-    opacity: 1; /* Firefox */
+    opacity: 1;
   }
   
-  .login-form-input::-ms-input-placeholder { /* Microsoft Edge */
+  .login-form-input::-ms-input-placeholder {
     color: var(--lightGray);
   }
   
