@@ -2,7 +2,7 @@ import './styles.scss';
 
 const Movies = () => {
     return (
-      <h1>Listage de filmes</h1>
+      <h1>Listagem de filmes</h1>
     )
   }
   

@@ -3,19 +3,20 @@ import Navbar from "./core/components/Navbar";
 import history from "./core/utils/history";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
+import PrivateRoute from "./core/components/Routes/PrivateRoute";
 
 const Routes = () => (
-  <Router history={ history }>
+  <Router history={history}>
     <Navbar />
     <Switch>
       <Route path="/" exact>
         <Home />
       </Route>
-      <Route path="/movies">
+      <PrivateRoute path="/movies">
         <Movies />
-      </Route>
+      </PrivateRoute>
     </Switch>
-    </Router>
+  </Router>
 )
 
 export default Routes;
