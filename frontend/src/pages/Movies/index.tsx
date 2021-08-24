@@ -1,43 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MovieResponse } from '../../core/types/Movie';
 import { makePrivateRequest } from '../../core/utils/requests';
-import Filter from './components/Filter';
+import Filter, { FilterData } from './components/Filter';
 import MovieCard from './components/MovieCard';
 import './styles.scss';
 
 const Movies = () => {
-  const [moviesResponse, setMoviesResponse] = useState<MovieResponse>()
+  const [moviesResponse, setMoviesResponse] = useState<MovieResponse>();
 
-  const getProducts = () => {
+  const getMovies = useCallback((filter?: FilterData) => {
     const params = {
-      linesPerPage: 16
+      linesPerPage: 8,
+      genreId: filter?.genreId
     }
 
     makePrivateRequest({ url: '/movies', params })
       .then(response => {
         setMoviesResponse(response.data);
       })
-  }
+    }, [])
 
   useEffect(() => {
-    getProducts();
-  }, [])
+    getMovies()
+  }, [getMovies])
 
     return (
-      <div className="movies-container">
-      <Filter />
-
+    <div className="movies-container">
+      <Filter onSearch={filter => getMovies(filter)} />
       <div className="movie-content">
-      {moviesResponse?.content.map(movie => (
-          <Link to={ `/movies/${movie.id}` } key={ movie.id }>
-            <MovieCard movie={ movie } />
+        {moviesResponse?.content.map(movie => (
+          <Link to={`/movies/${movie.id}`} key={movie.id}>
+            <MovieCard movie={movie} />
           </Link>
         ))}
       </div>
     </div>
-    )
-  }
-  
-  export default Movies;
-  
+  )
+}
+
+export default Movies;
