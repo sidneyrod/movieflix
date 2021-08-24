@@ -2,30 +2,33 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MovieResponse } from '../../core/types/Movie';
 import { makePrivateRequest } from '../../core/utils/requests';
+import Pagination from './components/Pagination';
 import Filter, { FilterData } from './components/Filter';
 import MovieCard from './components/MovieCard';
 import './styles.scss';
 
 const Movies = () => {
   const [moviesResponse, setMoviesResponse] = useState<MovieResponse>();
+  const [activePage, setActivePage] = useState(0);
 
   const getMovies = useCallback((filter?: FilterData) => {
     const params = {
       linesPerPage: 8,
-      genreId: filter?.genreId
+      genreId: filter?.genreId,
+      page: activePage
     }
 
     makePrivateRequest({ url: '/movies', params })
       .then(response => {
         setMoviesResponse(response.data);
       })
-    }, [])
+  }, [activePage])
 
   useEffect(() => {
-    getMovies()
-  }, [getMovies])
+    getMovies();
+  }, [getMovies]);
 
-    return (
+  return (
     <div className="movies-container">
       <Filter onSearch={filter => getMovies(filter)} />
       <div className="movie-content">
@@ -35,6 +38,13 @@ const Movies = () => {
           </Link>
         ))}
       </div>
+      {moviesResponse && (
+        <Pagination
+          totalPages={moviesResponse.totalPages}
+          activePage={activePage}
+          onChange={page => setActivePage(page)}
+        />
+      )}
     </div>
   )
 }
