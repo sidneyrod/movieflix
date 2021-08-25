@@ -3,8 +3,7 @@ import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { ReactComponent as MainImage } from '../../../core/assets/main.svg'
-import { makeLogin, makeRequest } from '../../../core/utils/requests';
-import { saveSessionData } from '../../../core/utils/auth';
+import { makeRequest } from '../../../core/utils/requests';
 import AuthCard from '../components/AuthCard';
 import AuthCardButton from '../components/AuthCardButton';
 

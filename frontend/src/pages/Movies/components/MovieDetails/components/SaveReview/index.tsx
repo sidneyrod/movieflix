@@ -21,8 +21,8 @@ const SaveReview = ({ movieId }: Props) => {
       method: 'POST',
       data: payload
     }).then(() => {
-      history.push(`/movies`);
-      toast.success('Avaliação salva com sucesso!', { delay: 500 });
+      toast.success('Avaliação salva com sucesso!', { delay: 400 });
+      history.push(`${movieId}`);
     }).catch(() => {
       toast.error('Ocorreu um erro ao salvar sua avaliação!');
     })
