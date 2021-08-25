@@ -1,6 +1,7 @@
 import { Redirect, Router, Route, Switch } from "react-router-dom";
 import MovieDetails from "./pages/Movies/components/MovieDetails";
 import PrivateRoute from "./core/components/Routes/PrivateRoute";
+import CreateAccount from "./pages/Home/CreateAccount";
 import { isAuthenticated } from "./core/utils/auth";
 import Navbar from "./core/components/Navbar";
 import history from "./core/utils/history";
@@ -11,13 +12,22 @@ const Routes = () => (
   <Router history={history}>
     <Navbar />
     <Switch>
+      <Redirect from="/" to="/login" exact />
       <Route
-        path="/"
-        exact
+        path="/login"
         render={() => {
           return (isAuthenticated() ?
             <Redirect to='/movies' /> :
             <Home />
+          )
+        }}
+      />
+      <Route
+        path="/criar-conta"
+        render={() => {
+          return (isAuthenticated() ?
+            <Redirect to='/movies' /> :
+            <CreateAccount />
           )
         }}
       />
