@@ -22,7 +22,7 @@ const SaveReview = ({ movieId }: Props) => {
       data: payload
     }).then(() => {
       toast.success('Avaliação salva com sucesso!', { delay: 400 });
-      history.push(`${movieId}`);
+      history.push(`/movies`);
     }).catch(() => {
       toast.error('Ocorreu um erro ao salvar sua avaliação!');
     })
@@ -37,15 +37,15 @@ const SaveReview = ({ movieId }: Props) => {
   return (
     <div className="post-new-review-container">
       <textarea
-        value={ review }
+        value={review}
         placeholder="Digite aqui sua avaliação"
         className="new-review-text"
-        onChange={ handleChangeReviewText }
+        onChange={handleChangeReviewText}
       />
 
       <button
         className="new-review-button"
-        onClick={ saveReview }
+        onClick={saveReview}
       >
         <span className="new-review-button-text">Salvar avaliação</span>
       </button>

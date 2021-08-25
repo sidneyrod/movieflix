@@ -33,7 +33,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] VISITOR_OR_MEMBER = { "/movies/**", "/reviews/**", "/genres/**" };
 
-	private static final String[] USERS = { "/users/**" };
+	//private static final String[] USERS = { "/users/**" };
+	
+	private static final String[] CREATE_USER = { "/users/**" };
+	
+	private static final String[] POST_REVIEW = { "/reviews" };
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -52,7 +56,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(PUBLIC).permitAll()
 		.antMatchers(HttpMethod.GET, VISITOR_OR_MEMBER).permitAll()
 		.antMatchers(VISITOR_OR_MEMBER).hasRole("MEMBER")
-		.antMatchers(USERS).hasRole("MEMBER")
+		//.antMatchers(USERS).hasRole("MEMBER")
+		.antMatchers(HttpMethod.POST, CREATE_USER).permitAll()
+		.antMatchers(HttpMethod.POST, POST_REVIEW).hasRole("MEMBER")
 		.anyRequest().authenticated();
 		
 		http.cors().configurationSource(corsConfigurationSource());

@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { LoginData, makeLogin } from '../../core/utils/requests';
-import { ReactComponent as MainImage } from '../../core/assets/main.svg';
-import { saveSessionData } from '../../core/utils/auth';
 import { useHistory } from 'react-router';
+import { LoginData, makeLogin } from '../../core/utils/requests';
+import { saveSessionData } from '../../core/utils/auth';
+import { ReactComponent as MainImage } from '../../core/assets/main.svg';
 import AuthCard from './components/AuthCard';
 import AuthCardButton from './components/AuthCardButton';
 import './styles.scss';
@@ -17,12 +17,12 @@ const Home = () => {
   const onSubmit = (data: LoginData) => {
     makeLogin(data)
       .then(response => {
-        setHasError(false)
-        saveSessionData(response.data)
-        history.push('/movies')
+        setHasError(false);
+        saveSessionData(response.data);
+        history.push('/movies');
       })
       .catch(() => {
-        setHasError(true)
+        setHasError(true);
       })
   }
 

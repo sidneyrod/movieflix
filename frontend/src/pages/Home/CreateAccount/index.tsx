@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { ReactComponent as MainImage } from '../../../core/assets/main.svg'
-import { makeRequest } from '../../../core/utils/requests';
+import { useHistory } from 'react-router';
+import { makeLogin, makeRequest } from '../../../core/utils/requests';
+import { saveSessionData } from '../../../core/utils/auth';
+import { ReactComponent as MainImage } from '../../../core/assets/main.svg';
 import AuthCard from '../components/AuthCard';
 import AuthCardButton from '../components/AuthCardButton';
 
@@ -32,11 +32,21 @@ const CreateAccount = () => {
             url: '/users',
             method: 'POST',
             data: payload
-        }).then(() => {
-            toast.success('Usuário criado com sucesso!');
-            history.push('/login')
-          }).catch(() => {
-            toast.error('Erro ao tentar criar o usuário!');
+        }).then(response => {
+            const loginData = {
+                username: response.data.email,
+                password: createAccountData.password
+            }
+
+            makeLogin(loginData)
+                .then(response => {
+                    setHasError(false);
+                    saveSessionData(response.data);
+                    history.push('/movies');
+                })
+                .catch(() => {
+                    setHasError(true);
+                })
         })
     }
 
@@ -86,4 +96,4 @@ const CreateAccount = () => {
     )
 }
 
-export default CreateAccount;
+export default CreateAccount

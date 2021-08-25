@@ -1,12 +1,12 @@
-import { Redirect, Router, Route, Switch } from "react-router-dom";
-import MovieDetails from "./pages/Movies/components/MovieDetails";
-import PrivateRoute from "./core/components/Routes/PrivateRoute";
-import CreateAccount from "./pages/Home/CreateAccount";
+import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { isAuthenticated } from "./core/utils/auth";
 import Navbar from "./core/components/Navbar";
-import history from "./core/utils/history";
-import Movies from "./pages/Movies";
 import Home from "./pages/Home";
+import history from "./core/utils/history";
+import CreateAccount from "./pages/Home/CreateAccount";
+import Movies from "./pages/Movies";
+import PrivateRoute from "./core/components/Routes/PrivateRoute";
+import MovieDetails from "./pages/Movies/components/MovieDetails";
 
 const Routes = () => (
   <Router history={history}>
@@ -34,6 +34,7 @@ const Routes = () => (
       <PrivateRoute path="/movies" exact>
         <Movies />
       </PrivateRoute>
+
       <PrivateRoute path="/movies/:movieId">
         <MovieDetails />
       </PrivateRoute>
