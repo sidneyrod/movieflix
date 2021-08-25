@@ -45,17 +45,17 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background-color: #f8d7da;
+  background-color: #F8D7DA;
   border-radius: 10px;
   margin-bottom: 30px;
 }
 
 .alert .alert-text {
-  color: #771a21;
+  color: #771A21;
 }
 
 .alert .close {
-  color: #771a21;
+  color: #771A21;
   cursor: pointer;
 }
 
@@ -71,7 +71,7 @@
     line-height: 25px;
     font-weight: bold;
     letter-spacing: -0.015em;
-    color: #e1e1e1;
+    color: #E1E1E1;
   }
 
   a {
@@ -132,7 +132,7 @@
   }
 
   .home-title {
-    font-size: 35px;
+    font-size: 38px;
     line-height: 50px;
     letter-spacing: -0.015em;
   }
@@ -143,5 +143,15 @@
     margin-bottom: 40px;
     font-size: 18px;
     line-height: 24px;
+  }
+
+  .no-account-container {
+    p {
+      font-size: 16px;
+    }
+
+    a {
+      font-size: 16px;
+    }
   }
 }
