@@ -1,20 +1,21 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MovieResponse } from '../../core/types/Movie';
+import { Genre, MovieResponse } from '../../core/types/Movie';
 import { makePrivateRequest } from '../../core/utils/requests';
 import Pagination from './components/Pagination';
-import Filter, { FilterData } from './components/Filter';
+import Filter from './components/Filter';
 import MovieCard from './components/MovieCard';
 import './styles.scss';
 
 const Movies = () => {
   const [moviesResponse, setMoviesResponse] = useState<MovieResponse>();
   const [activePage, setActivePage] = useState(0);
+  const [genre, setGenre] = useState<Genre>();
 
-  const getMovies = useCallback((filter?: FilterData) => {
+  const getMovies = useCallback(() => {
     const params = {
       linesPerPage: 8,
-      genreId: filter?.genreId,
+      genreId: genre?.id,
       page: activePage
     }
 
@@ -22,15 +23,23 @@ const Movies = () => {
       .then(response => {
         setMoviesResponse(response.data);
       })
-  }, [activePage])
+    }, [activePage, genre?.id])
 
   useEffect(() => {
     getMovies();
   }, [getMovies]);
 
+  const handleChangeGenre = (genre: Genre) => {
+    setActivePage(0);
+    setGenre(genre);
+  }
+
   return (
     <div className="movies-container">
-      <Filter onSearch={filter => getMovies(filter)} />
+      <Filter
+        genre={ genre }
+        handleChangeGenre={ handleChangeGenre }
+      />
       <div className="movie-content">
         {moviesResponse?.content.map(movie => (
           <Link to={`/movies/${movie.id}`} key={movie.id}>
