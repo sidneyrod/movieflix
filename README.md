@@ -20,7 +20,7 @@
 </div>
 
 # About Project
-MovieFlix is a full stack web application built during the **Bootcamp DevSuperior** (#BDS2), an event organized by [DevSuperior](https://devsuperior.com.br "DevSuperior Website").
+MovieFlix is a full stack web application built during the **Bootcamp DevSuperior** (#MovieFlix_Web_2), an event organized by [DevSuperior](https://devsuperior.com.br "DevSuperior Website").
 
 The application consists of a data movies, which can be listed and rated by users. Users can be visitors (VISITOR) and members (MEMBER). Only member users can enter ratings into the web site.
 
