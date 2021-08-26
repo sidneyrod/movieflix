@@ -6,7 +6,7 @@
   <p>Say what you think of your favorite movie</p>
       <p>
     <img alt="Sidney Rodrigues" 
-	src="https://img.shields.io/github/license/sidneyrod/movieflix?color=%23FFC700">
+	src="https://img.shields.io/github/license/sidneyrod/movieflix">
   </p>
 </div>
 
