@@ -31,7 +31,7 @@ When selecting a movie from the listing, a detail page is shown, where you can s
 A user has a name, email and password, and the email is their username. Each movie has a title, subtitle, an image, year of release, synopsis, and a genre. Member users can register ratings for the movies. The same member user can leave more than one rating for the same movie.
 
 The application is also fully responsive and has a registration screen. (Both features were not mandatory for the completion of the project and it was a bonus that I decided to implement).
-Link para a aplicação no netlify -> <a href="https://sidmovieflix.netlify.app/login">MovieFlix</a> <br />
+Link to application on Netlify -> <a href="https://sidmovieflix.netlify.app/login">MovieFlix</a> <br />
 
 You're able to access the application with users:
 <p>VISITOR -> email: bob@gmail.com | password: 123456</p>
