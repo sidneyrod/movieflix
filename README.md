@@ -3,11 +3,11 @@
   <a href="https://sidmovieflix.netlify.app/login">
     <h1>MovieFlix</h1>
   </a>
-  <p>Say what you think of your favorite movie</p>
-      <p>
+  <p>
     <img alt="Sidney Rodrigues" 
 	src="https://img.shields.io/github/license/sidneyrod/movieflix">
   </p>
+  <p>Say what you think of your favorite movie</p>
 </div>
 
 <div align="center">
