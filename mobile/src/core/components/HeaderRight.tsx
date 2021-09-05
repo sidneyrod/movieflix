@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { AuthContext } from '../../contexts/AuthContext';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
@@ -9,8 +9,20 @@ export default function HeaderRight() {
     const { setUserLogged } = useContext(AuthContext);
 
     async function handleLogout() {
-        await logout();
-        setUserLogged();
+        Alert.alert('Sair', 'Tem certeza que deseja sair?', [
+            { text: 'Não', style: 'cancel' },
+            {
+                text: 'Sim', onPress: async () => {
+                    try {
+                        await logout()
+                        setUserLogged()
+                    }
+                    catch (error) {
+                        Alert.alert('Ocorreu um erro!')
+                    }
+                }
+            }
+        ])
     }
 
     return (

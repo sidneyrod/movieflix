@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, Image } from "react-native";
-import { makeRequest } from "../core/utils/request";
+import React, { useContext, useState } from "react";
+import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, Image, Alert } from "react-native";
+import { makeLogin, makeRequest } from "../core/utils/request";
+import { AuthContext } from "../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/core";
 import Button from "../core/components/Button";
 import colors from "../styles/colors";
@@ -9,7 +10,7 @@ import eyesClosed from '../core/assets/eyes-closed.png';
 import eyesOpened from '../core/assets/eyes-opened.png';
 
 export default function CreateAccount() {
-  const navigation = useNavigation();
+  const { setUserLogged } = useContext(AuthContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,11 +32,18 @@ export default function CreateAccount() {
         method: 'POST',
         data: payload
       })
-
-      navigation.navigate.arguments('Login');
+      Alert.alert('Cadastrar', 'Conta criada com sucesso!', [
+        {
+          text: 'OK', onPress: async () => {
+            const loginData = { username: email, password }
+            await makeLogin(loginData)
+            setUserLogged()
+          }
+        }
+      ])
     }
     catch (e) {
-      console.log(e);
+      Alert.alert('Ocorreu um erro!');
     }
   }
 
@@ -94,8 +102,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     width: '100%',
     backgroundColor: colors.darkGray,
-    paddingTop: 70,
-    paddingBottom: 30,
+    paddingVertical: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 40
   },
 
@@ -115,7 +124,7 @@ const styles = StyleSheet.create({
 
   textInput: {
     width: '100%',
-    maxWidth: 335,
+    maxWidth: 400,
     height: 50,
     //backgroundColor: colors.whiteBackground,
     borderWidth: 1,
