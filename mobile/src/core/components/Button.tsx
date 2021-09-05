@@ -11,15 +11,15 @@ interface Props extends TouchableOpacityProps {
 export default function Button({ title, children, ...rest }: Props) {
   return (
     <TouchableOpacity
-      style={ styles.buttonContainer }
-      activeOpacity={ 0.8 }
-      { ...rest }
+      style={styles.buttonContainer}
+      activeOpacity={0.8}
+      {...rest}
     >
-      <Text style={ styles.buttonText }>
-        Fazer Login
+      <Text style={styles.buttonText}>
+        {title}
       </Text>
 
-      { children }
+      {children}
     </TouchableOpacity>
   )
 }

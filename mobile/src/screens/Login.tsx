@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView 
 import { makeLogin } from "../core/utils/request";
 import { Feather } from "@expo/vector-icons";
 import { AuthContext } from "../contexts/AuthContext";
+import { useNavigation } from "@react-navigation/core";
 import eyesOpened from '../core/assets/eyes-opened.png'
 import eyesClosed from '../core/assets/eyes-closed.png'
 import Button from "../core/components/Button";
@@ -11,6 +12,7 @@ import fonts from "../styles/fonts";
 
 export default function Login() {
   const { setUserLogged } = useContext(AuthContext);
+  const navigation = useNavigation();
   const [hidePassword, setHidePassword] = useState(true);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,48 +24,63 @@ export default function Login() {
   }
 
   return (
-    <ScrollView contentContainerStyle={ styles.container }>
-      <Text style={ styles.title }>Login</Text>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Login</Text>
 
       <TextInput
         placeholder="Email"
         //placeholderTextColor={ colors.placeholder }
         autoCapitalize="none"
         keyboardType="email-address"
-        value={ username }
-        onChangeText={ event => setUsername(event) }
-        style={ styles.textInput }
+        value={username}
+        onChangeText={event => setUsername(event)}
+        style={styles.textInput}
       />
 
-      <View style={ styles.passwordGroup }>
+      <View style={styles.passwordGroup}>
         <TextInput
           placeholder="Senha"
           //placeholderTextColor={ colors.placeholder }
           autoCapitalize="none"
-          secureTextEntry={ hidePassword }
-          value={ password }
-          onChangeText={ event => setPassword(event) }
-          style={ styles.textInput }
+          secureTextEntry={hidePassword}
+          value={password}
+          onChangeText={event => setPassword(event)}
+          style={styles.textInput}
         />
         <TouchableOpacity
-          onPress={ () => setHidePassword(!hidePassword) }
-          style={ styles.toggle }
+          onPress={() => setHidePassword(!hidePassword)}
+          style={styles.toggle}
         >
-          <Image source={ hidePassword ? eyesOpened : eyesClosed } />
+          <Image source={hidePassword ? eyesOpened : eyesClosed} />
         </TouchableOpacity>
       </View>
 
       <Button
         title='Fazer Login'
-        onPress={ () => handleLogin() }
+        onPress={() => handleLogin()}
       >
-        <View style={ styles.buttonImageContainer }>
+        <View style={styles.buttonImageContainer}>
           <Feather
             name='chevron-right'
-            style={ styles.buttonImage }
+            style={styles.buttonImage}
           />
         </View>
       </Button>
+      <View style={styles.noAccountContainer}>
+        <Text style={styles.noAccountTextLeft}>
+          Não tem conta?
+        </Text>
+
+        <View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate.arguments('CreateAccount')}
+          >
+            <Text style={styles.noAccountTextRight}>
+              Cadastre-se
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </ScrollView>
   )
 }
@@ -127,5 +144,26 @@ const styles = StyleSheet.create({
   buttonImage: {
     fontSize: 28,
     color: colors.white
+  },
+
+  noAccountContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 30
+  },
+
+  noAccountTextLeft: {
+    fontFamily: fonts.title,
+    //color: colors.whiteBackground,
+    fontSize: 16
+  },
+
+  noAccountTextRight: {
+    fontFamily: fonts.title,
+    color: colors.yellow,
+    fontSize: 16,
+    textTransform: 'uppercase',
+    marginLeft: 5
+
   }
 })
