@@ -57,7 +57,8 @@ export default function Movies() {
           renderItem={({ item }) => (
             <MovieCard
               key={item.id}
-              movie={item}
+              movie={ item }
+              movieId={ item.id }
             />
           )}
           numColumns={1}
