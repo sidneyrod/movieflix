@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/core"; 
+import { useNavigation } from "@react-navigation/core";
 import { Feather } from "@expo/vector-icons";
 import Button from "../core/components/Button";
 import mainImage from '../core/assets/main-image.png';
@@ -12,24 +12,24 @@ export default function Home() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={ mainImage } style={ styles.image } />
+      <Image source={mainImage} style={styles.image} />
 
-      <Text style={ styles.title }>
+      <Text style={styles.title}>
         Avalie filmes
       </Text>
 
-      <Text style={ styles.subtitle }>
+      <Text style={styles.subtitle}>
         Diga o que achou do seu {'\n'} filme favorito
       </Text>
 
       <Button
         title='Fazer Login'
-        onPress={ () => navigation.navigate.arguments('Login') }
+        onPress={() => navigation.navigate.arguments('Login')}
       >
-         <View style={ styles.buttonImageContainer }>
+        <View style={styles.buttonImageContainer}>
           <Feather
             name='chevron-right'
-            style={ styles.buttonImage }
+            style={styles.buttonImage}
           />
         </View>
       </Button>

@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { getSessionData, logout } from './auth';
+import { CLIENT_ID, CLIENT_SECRET, logout, saveSessionData } from './auth';
+import { encode as btoa } from 'base-64';
+import qs from 'qs';
 
 export type LoginData = {
   username: string;
@@ -25,11 +27,16 @@ export async function makeRequest(params: AxiosRequestConfig) {
   })
 }
 
-export async function makePrivateRequest(params: AxiosRequestConfig) {
-  const sessionData = await getSessionData();
+export async function makeLogin(loginData: LoginData) {
+  const token = `${CLIENT_ID}:${CLIENT_SECRET}`;
 
   const headers = {
-    'Authorization': `Bearer ${sessionData.access_token}`
+    Authorization: `Basic ${btoa(token)}`,
+    'Content-Type': 'application/x-www-form-urlencoded'
   }
-    return makeRequest({ ...params, headers })
+  const payload = qs.stringify({ ...loginData, grant_type: 'password' });
+
+  const response = await makeRequest({ url: '/oauth/token', data: payload, method: 'POST', headers });
+
+  saveSessionData(response.data);
 }

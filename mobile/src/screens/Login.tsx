@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { makeLogin } from "../core/utils/auth";
+import { makeLogin } from "../core/utils/request";
 import { Feather } from "@expo/vector-icons";
+import { AuthContext } from "../contexts/AuthContext";
 import eyesOpened from '../core/assets/eyes-opened.png'
 import eyesClosed from '../core/assets/eyes-closed.png'
 import Button from "../core/components/Button";
@@ -10,16 +10,15 @@ import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
 export default function Login() {
-  const navigation = useNavigation()
-  const [hidePassword, setHidePassword] = useState(true)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const { setUserLogged } = useContext(AuthContext);
+  const [hidePassword, setHidePassword] = useState(true);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   async function handleLogin() {
-    const loginData = { username, password }
-    makeLogin(loginData)
-
-    navigation.navigate.arguments('Movies')
+    const loginData = { username, password };
+    await makeLogin(loginData);
+    setUserLogged();
   }
 
   return (
@@ -28,7 +27,7 @@ export default function Login() {
 
       <TextInput
         placeholder="Email"
-        placeholderTextColor={ colors.placeholder }
+        //placeholderTextColor={ colors.placeholder }
         autoCapitalize="none"
         keyboardType="email-address"
         value={ username }
@@ -39,7 +38,7 @@ export default function Login() {
       <View style={ styles.passwordGroup }>
         <TextInput
           placeholder="Senha"
-          placeholderTextColor={ colors.placeholder }
+          //placeholderTextColor={ colors.placeholder }
           autoCapitalize="none"
           secureTextEntry={ hidePassword }
           value={ password }
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 335,
     height: 50,
-    backgroundColor: colors.whiteBackground,
+    //backgroundColor: colors.whiteBackground,
     borderWidth: 1,
     borderColor: colors.whiteBorder,
     borderRadius: 10,
