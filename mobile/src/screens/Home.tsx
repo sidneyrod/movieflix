@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/core"; 
 import { Feather } from "@expo/vector-icons";
+import Button from "../core/components/Button";
 import mainImage from '../core/assets/main-image.png';
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
@@ -21,22 +22,17 @@ export default function Home() {
         Diga o que achou do seu {'\n'} filme favorito
       </Text>
 
-      <TouchableOpacity
-        style={ styles.buttonContainer }
-        activeOpacity={ 0.8 }
-        onPress={ () => navigation.navigate }
+      <Button
+        title='Fazer Login'
+        onPress={ () => navigation.navigate.arguments('Login') }
       >
-        <Text style={ styles.buttonText }>
-          Fazer Login
-        </Text>
-
-        <View style={ styles.buttonImageContainer }>
+         <View style={ styles.buttonImageContainer }>
           <Feather
             name='chevron-right'
             style={ styles.buttonImage }
           />
         </View>
-      </TouchableOpacity>
+      </Button>
     </ScrollView>
   )
 }
@@ -74,27 +70,6 @@ const styles = StyleSheet.create({
     letterSpacing: -0.015,
     color: colors.subtitle,
     marginBottom: 50
-  },
-
-  buttonContainer: {
-    width: '100%',
-    maxWidth: 330,
-    height: 50,
-    backgroundColor: colors.yellow,
-    borderRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-
-  buttonText: {
-    flex: 1,
-    fontFamily: fonts.title,
-    fontSize: 16,
-    lineHeight: 22,
-    textAlign: 'center',
-    color: colors.black,
-    textTransform: 'uppercase'
   },
 
   buttonImageContainer: {
