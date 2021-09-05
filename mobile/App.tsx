@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
 import { useFonts, OpenSans_400Regular, OpenSans_700Bold } from '@expo-google-fonts/open-sans';
 import { AuthContext } from './src/contexts/AuthContext';
 import { isAuthenticated } from './src/core/utils/auth';
@@ -13,19 +12,20 @@ export default function App() {
 
   async function setUserLogged() {
     const user = await isAuthenticated();
-    if (user) {
+    const isUserAuthenticated = await isAuthenticated()
+
+    if (isUserAuthenticated)
       setIsUserLogged(true);
-    } else {
+    else
       setIsUserLogged(false);
-    }
   }
 
-  const [ fontsLoaded ] = useFonts({
+  const [fontsLoaded] = useFonts({
     OpenSans_400Regular,
     OpenSans_700Bold
   })
 
-  if(!fontsLoaded)
+  if (!fontsLoaded)
     return <AppLoading />
 
   return (
@@ -36,16 +36,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFC700',
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  h1: {
-    fontSize: 25,
-    fontWeight: '700',
-  }
-})
