@@ -7,5 +7,9 @@ export default {
   subtitle: '#F2F2F2',
   black: '#000',
   white: '#FFF',
-  whiteBorder: '#E1E1E1'
+  whiteBorder: '#E1E1E1',
+  placeholder: '#BFBFBF',
+  whiteBackground: '#FEFEFE',
+  subtitleLight: '#CDCDCD',
+  subtitleDark: '#9E9E9E'
 }

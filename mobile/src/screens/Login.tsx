@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView, Alert } from "react-native";
 import { makeLogin } from "../core/utils/request";
 import { Feather } from "@expo/vector-icons";
 import { AuthContext } from "../contexts/AuthContext";
@@ -18,9 +18,16 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   async function handleLogin() {
-    const loginData = { username, password };
-    await makeLogin(loginData);
-    setUserLogged();
+    try {
+      const loginData = { username, password }
+      await makeLogin(loginData)
+      setUserLogged()
+    }
+    catch (e) {
+      Alert.alert('Ops...', 'Usuário ou senha inválidos!', [
+        { text: 'OK', style:'cancel' }
+      ])
+    }
   }
 
   return (
@@ -29,7 +36,7 @@ export default function Login() {
 
       <TextInput
         placeholder="Email"
-        //placeholderTextColor={ colors.placeholder }
+        placeholderTextColor={ colors.placeholder }
         autoCapitalize="none"
         keyboardType="email-address"
         value={username}
@@ -40,7 +47,7 @@ export default function Login() {
       <View style={styles.passwordGroup}>
         <TextInput
           placeholder="Senha"
-          //placeholderTextColor={ colors.placeholder }
+          placeholderTextColor={ colors.placeholder }
           autoCapitalize="none"
           secureTextEntry={hidePassword}
           value={password}
@@ -114,7 +121,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 335,
     height: 50,
-    //backgroundColor: colors.whiteBackground,
+    backgroundColor: colors.whiteBackground,
     borderWidth: 1,
     borderColor: colors.whiteBorder,
     borderRadius: 10,
@@ -156,7 +163,7 @@ const styles = StyleSheet.create({
 
   noAccountTextLeft: {
     fontFamily: fonts.title,
-    //color: colors.whiteBackground,
+    color: colors.whiteBackground,
     fontSize: 16
   },
 
