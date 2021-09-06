@@ -10,16 +10,16 @@ type AccessToken = {
   authorities: Role[];
 }
 
-export type Role = 'ROLE_VISITOR' | 'ROLE_MEMBER'
+export type Role = 'ROLE_VISITOR' | 'ROLE_MEMBER';
 
 export async function isAuthenticated() {
   try {
     const token = await AsyncStorage.getItem('@movieflix:accessToken');
 
-    return token ? true : false
+    return token ? true : false;
   }
   catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
 
@@ -28,7 +28,7 @@ export async function logout() {
     AsyncStorage.removeItem('@movieflix:accessToken');
   }
   catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
 
@@ -40,12 +40,12 @@ async function getAcessTokenDecoded() {
     return accessTokenDecoded as AccessToken;
   }
   catch (e) {
-    return {} as AccessToken
+    return {} as AccessToken;
   }
 }
 
 export async function isUserMember() {
   const { authorities } = await getAcessTokenDecoded();
 
-  return authorities.toString() === 'ROLE_MEMBER'
+  return authorities.toString() === 'ROLE_MEMBER';
 }

@@ -1,6 +1,6 @@
-import { Feather } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import { Genre } from '../../core/types/Movie';
 import { makePrivateRequest } from '../../core/utils/request';
 import colors from '../../styles/colors';
@@ -20,7 +20,7 @@ export default function Filter({ genre, handleChangeGenre }: Props) {
 
   async function getGenres() {
     const response = await makePrivateRequest({ url: '/genres' });
-    setGenres([{ id: 0, name: 'Todos' }, ...response.data]);
+    setGenres([{id: 0, name: 'Todos'}, ...response.data]);
   }
 
   useEffect(() => {
@@ -30,43 +30,43 @@ export default function Filter({ genre, handleChangeGenre }: Props) {
   return (
     <View>
       <Modal
-        visible={showGenres}
+        visible={ showGenres }
         animationType="fade"
-        transparent={true}
+        transparent={ true }
         presentationStyle="overFullScreen"
       >
-        <View style={styles.modalContainer}>
-          <ScrollView contentContainerStyle={styles.modalContent}>
+        <View style={ styles.modalContainer }>
+          <ScrollView contentContainerStyle={ styles.modalContent }>
             {genres?.map(genre => (
               <TouchableOpacity
-                style={styles.modalItem}
-                key={genre.id}
+                style={ styles.modalItem }
+                key={ genre.id }
                 onPress={() => {
                   setShowGenres(!showGenres)
                   handleChangeGenre(genre)
                 }}
               >
-                <Text style={styles.modalItemText}>
-                  {genre.name}
+                <Text style={ styles.modalItemText }>
+                  { genre.name }
                 </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
       </Modal>
-      <View style={styles.filterContainer}>
+      <View style={ styles.filterContainer }>
         <TouchableOpacity
-          onPress={() => setShowGenres(!showGenres)}
-          style={styles.filterSelectContainer}
-          activeOpacity={0.2}
+          onPress={ () => setShowGenres(!showGenres) }
+          style={ styles.filterSelectContainer }
+          activeOpacity={ 0.2 }
         >
-          <Text style={styles.filterSelectText}>
-            {!genre?.id || genre.id === 0 ? 'Todos' : genre?.name}
+          <Text style={ styles.filterSelectText }>
+            { !genre?.id || genre.id === 0 ? 'Todos' : genre?.name }
           </Text>
           <Feather
             name="chevron-down"
-            size={28}
-            color={colors.whiteBorder}
+            size={ 28 }
+            color={ colors.whiteBorder }
           />
         </TouchableOpacity>
       </View>

@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView, Alert } from "react-native";
-import { makeLogin } from "../core/utils/request";
 import { Feather } from "@expo/vector-icons";
+import { makeLogin } from "../core/utils/request";
 import { AuthContext } from "../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/core";
-import eyesOpened from '../core/assets/eyes-opened.png'
-import eyesClosed from '../core/assets/eyes-closed.png'
 import Button from "../core/components/Button";
+import eyesOpened from '../core/assets/eyes-opened.png';
+import eyesClosed from '../core/assets/eyes-closed.png';
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
@@ -20,8 +20,8 @@ export default function Login() {
   async function handleLogin() {
     try {
       const loginData = { username, password }
-      await makeLogin(loginData)
-      setUserLogged()
+      await makeLogin(loginData);
+      setUserLogged();
     }
     catch (e) {
       Alert.alert('Ops...', 'Usuário ou senha inválidos!', [
@@ -31,58 +31,59 @@ export default function Login() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Login</Text>
+    <ScrollView contentContainerStyle={ styles.container }>
+      <Text style={ styles.title }>Login</Text>
 
       <TextInput
         placeholder="Email"
         placeholderTextColor={ colors.placeholder }
         autoCapitalize="none"
         keyboardType="email-address"
-        value={username}
-        onChangeText={event => setUsername(event)}
-        style={styles.textInput}
+        value={ username }
+        onChangeText={ event => setUsername(event) }
+        style={ styles.textInput }
       />
 
-      <View style={styles.passwordGroup}>
+      <View style={ styles.passwordGroup }>
         <TextInput
           placeholder="Senha"
           placeholderTextColor={ colors.placeholder }
           autoCapitalize="none"
-          secureTextEntry={hidePassword}
-          value={password}
-          onChangeText={event => setPassword(event)}
-          style={styles.textInput}
+          secureTextEntry={ hidePassword }
+          value={ password }
+          onChangeText={ event => setPassword(event) }
+          style={ styles.textInput }
         />
         <TouchableOpacity
-          onPress={() => setHidePassword(!hidePassword)}
-          style={styles.toggle}
+          onPress={ () => setHidePassword(!hidePassword) }
+          style={ styles.toggle }
         >
-          <Image source={hidePassword ? eyesOpened : eyesClosed} />
+          <Image source={ hidePassword ? eyesOpened : eyesClosed } />
         </TouchableOpacity>
       </View>
 
       <Button
         title='Fazer Login'
-        onPress={() => handleLogin()}
+        onPress={ () => handleLogin() }
       >
-        <View style={styles.buttonImageContainer}>
+        <View style={ styles.buttonImageContainer }>
           <Feather
             name='chevron-right'
-            style={styles.buttonImage}
+            style={ styles.buttonImage }
           />
         </View>
       </Button>
-      <View style={styles.noAccountContainer}>
-        <Text style={styles.noAccountTextLeft}>
+
+      <View style={ styles.noAccountContainer }>
+        <Text style={ styles.noAccountTextLeft }>
           Não tem conta?
         </Text>
 
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate.arguments('CreateAccount')}
+            onPress={ () => navigation.navigate('CreateAccount') }
           >
-            <Text style={styles.noAccountTextRight}>
+            <Text style={ styles.noAccountTextRight }>
               Cadastre-se
             </Text>
           </TouchableOpacity>
@@ -173,6 +174,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textTransform: 'uppercase',
     marginLeft: 5
-
   }
 })

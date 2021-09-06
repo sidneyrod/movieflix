@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, View, ActivityIndicator } from "react-native";
-import { Genre, Movie } from "../core/types/Movie";;
+import { Genre, Movie } from "../core/types/Movie";
 import { makePrivateRequest } from "../core/utils/request";
-import Filter from "./components/Filter";
-import MovieCard from './components/MovieCard';
+import MovieCard from "./components/MovieCard";
 import colors from "../styles/colors";
+import Filter from "./components/Filter";
 
 export default function Movies() {
   const [movies, setMovies] = useState<Movie[]>();
@@ -20,11 +20,11 @@ export default function Movies() {
       genreId: genre?.id
     }
 
-    const response = await makePrivateRequest({ url: '/movies', params });
+    const response = await makePrivateRequest({ url: '/movies', params});
     const { content } = response.data;
 
     if (!response)
-      setIsLoading(true);
+      setIsLoading(true)
 
     if (page > 0) {
       setMovies(oldValue => [...oldValue, ...content]);
@@ -55,28 +55,29 @@ export default function Movies() {
   }, [genre?.id]);
 
   return (
-    <View style={styles.container}>
+    <View style={ styles.container }>
       {isLoading ? (
-        <ActivityIndicator color={colors.whiteBorder} size='large' />
+        <ActivityIndicator color={ colors.whiteBorder } size='large' />
       ) : (
         <>
           <Filter
-            genre={genre}
-            handleChangeGenre={handleChangeGenre}
+            genre={ genre }
+            handleChangeGenre={ handleChangeGenre }
           />
+
           <FlatList
-            data={movies}
-            keyExtractor={item => String(item.id)}
+            data={ movies }
+            keyExtractor={ item => String(item.id) }
             renderItem={({ item }) => (
               <MovieCard
-                key={item.id}
-                movieId={item.id}
-                movie={item}
+                key={ item.id }
+                movieId={ item.id }
+                movie={ item }
               />
             )}
-            numColumns={1}
-            showsVerticalScrollIndicator={false}
-            onEndReachedThreshold={0.1}
+            numColumns={ 1 }
+            showsVerticalScrollIndicator={ false }
+            onEndReachedThreshold={ 0.1 }
             onEndReached={({ distanceFromEnd }) => loadMore(distanceFromEnd)}
             ListFooterComponent={ isLoadingMore ? <ActivityIndicator style={{marginBottom: 20}} color={ colors.yellow } /> : <></> }
           />
@@ -89,6 +90,7 @@ export default function Movies() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
+    height: '100%',
     backgroundColor: colors.darkGray,
     paddingHorizontal: 20,
     paddingTop: 20

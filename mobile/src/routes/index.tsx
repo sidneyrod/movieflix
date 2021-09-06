@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CreateAccount, Home, Login, MovieDetails, Movies } from '../screens';
+import { AuthContext } from '../contexts/AuthContext';
 import { isAuthenticated } from '../core/utils/auth';
 import HeaderLeft from '../core/components/HeaderLeft';
 import HeaderRight from '../core/components/HeaderRight';
-import { AuthContext } from '../contexts/AuthContext';
 import colors from '../styles/colors';
 
 const Stack = createStackNavigator();
 
-export default async function Routes() {
+export default function Routes() {
   const { isUserLogged } = useContext(AuthContext);
 
   async function checkIsUserLogged() {
@@ -34,11 +34,11 @@ export default async function Routes() {
         >
           <Stack.Screen
             name="Movies"
-            component={Movies}
+            component={ Movies }
           />
           <Stack.Screen
             name="MovieDetails"
-            component={MovieDetails}
+            component={ MovieDetails }
           />
         </Stack.Navigator>
       ) : (
@@ -51,19 +51,15 @@ export default async function Routes() {
         >
           <Stack.Screen
             name="Home"
-            component={Home}
+            component={ Home }
           />
           <Stack.Screen
             name="Login"
-            component={Login}
-          />
-          <Stack.Screen
-            name="Movies"
-            component={Movies}
+            component={ Login }
           />
           <Stack.Screen
             name="CreateAccount"
-            component={CreateAccount}
+            component={ CreateAccount }
           />
         </Stack.Navigator>
       )}

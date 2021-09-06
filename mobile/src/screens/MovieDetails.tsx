@@ -7,11 +7,11 @@ import SaveReview from "./components/SaveReview";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
-export default function MovieDetails({ route: { params: { movieId } } }) {
+export default function MovieDetails({ route: { params: {movieId} } }) {
   const [movie, setMovie] = useState<Movie>();
 
   async function getMovie() {
-    const response = await makePrivateRequest({ url: `/movies/${movieId}` });
+    const response = await makePrivateRequest({ url: `/movies/${movieId}` })
     setMovie(response.data);
   }
 
@@ -23,41 +23,42 @@ export default function MovieDetails({ route: { params: { movieId } } }) {
     <ScrollView
       contentContainerStyle={styles.container}
     >
-      <View style={styles.cardContainer}>
+      <View style={ styles.cardContainer }>
         <Image
           source={{ uri: movie?.imgUrl }}
-          style={styles.movieImage}
+          style={ styles.movieImage }
         />
-        <View style={styles.movieInfoContainer}>
-          <Text style={styles.movieTitle}>
-            {movie?.title}
+        <View style={ styles.movieInfoContainer }>
+          <Text style={ styles.movieTitle }>
+            { movie?.title }
           </Text>
-          <Text style={styles.movieYear}>
-            {movie?.year}
+          <Text style={ styles.movieYear }>
+            { movie?.year }
           </Text>
-          <Text style={styles.movieSubtitle}>
-            {movie?.subTitle}
+          <Text style={ styles.movieSubtitle }>
+            { movie?.subTitle }
           </Text>
-          <Text style={styles.movieSynopseText}>
+          <Text style={ styles.movieSynopseText }>
             Sinopse
           </Text>
           <ScrollView
-            style={styles.movieSynopseContainer}
-            showsVerticalScrollIndicator={false}
+            style={ styles.movieSynopseContainer }
+            showsVerticalScrollIndicator={ false }
             persistentScrollbar={true}
+            nestedScrollEnabled={ true }
           >
-            <Text style={styles.movieSynopse}>
-              {movie?.synopsis}
+            <Text style={ styles.movieSynopse }>
+              { movie?.synopsis }
             </Text>
           </ScrollView>
         </View>
       </View>
-      <SaveReview movieId={movieId} />
+      <SaveReview movieId={ movieId } />
       {movie?.reviews.length !== 0 && (
-        <ScrollView style={styles.listReviewContainer}>
-          <Text style={styles.listReviewContainerTitle}>Avaliações</Text>
+        <ScrollView style={ styles.listReviewContainer }>
+          <Text style={ styles.listReviewContainerTitle }>Avaliações</Text>
           {movie?.reviews.map(review => (
-            <ListReview key={review.id} review={review} />
+            <ListReview key={ review.id } review={ review } />
           ))}
         </ScrollView>
       )}

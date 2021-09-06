@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { Alert, StyleSheet, TextInput, View } from 'react-native'
-import Button from '../../core/components/Button'
-import { isUserMember } from '../../core/utils/auth'
-import { makePrivateRequest } from '../../core/utils/request'
-import colors from '../../styles/colors'
+import React, { useEffect, useState } from 'react';
+import { Alert, StyleSheet, TextInput, View } from 'react-native';
+import { isUserMember } from '../../core/utils/auth';
+import { makePrivateRequest } from '../../core/utils/request';
+import Button from '../../core/components/Button';
+import colors from '../../styles/colors';
 
 type Props = {
-  movieId: any
+  movieId: any;
 }
 
 export default function SaveReview({ movieId }: Props) {
-  const [review, setReview] = useState('')
-  const [hasPermission, setHasPermission] = useState(false)
+  const [review, setReview] = useState('');
+  const [hasPermission, setHasPermission] = useState(false);
 
   async function checkIsUserMember() {
-    const user = await isUserMember()
-    setHasPermission(user)
+    const user = await isUserMember();
+    setHasPermission(user);
   }
 
   async function saveReview() {
@@ -24,28 +24,28 @@ export default function SaveReview({ movieId }: Props) {
         movieId,
         text: review
       }
-
+  
       await makePrivateRequest({
         url: '/reviews',
         method: 'POST',
         data: payload
       })
-
-      Alert.alert('', 'Avaliação salva com sucesso 🥳', [
+  
+      Alert.alert('', 'Avaliação salva com sucesso!', [
         { text: 'OK', style: 'cancel' }
       ])
-
-      setReview('')
+  
+      setReview('');
     }
     catch (e) {
-      Alert.alert('Ocorreu um erro 😕', 'O campo não pode estar vazio!', [
+      Alert.alert('Ocorreu um erro!', 'O campo não pode estar vazio!', [
         { text: 'OK', style: 'cancel' }
       ])
     }
   }
 
   useEffect(() => {
-    checkIsUserMember()
+    checkIsUserMember();
   }, [])
 
   return (
@@ -62,7 +62,6 @@ export default function SaveReview({ movieId }: Props) {
             value={ review }
             onChangeText={ text => setReview(text) }
           />
-
           <Button
             title='Salvar Avaliação'
             onPress={ () => saveReview() }

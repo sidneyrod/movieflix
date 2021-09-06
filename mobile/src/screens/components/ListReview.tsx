@@ -1,13 +1,12 @@
-import React from 'react'
-import { Feather } from '@expo/vector-icons'
-import { StyleSheet, Text, View } from "react-native"
-
-import { Review } from "../../core/types/Movie"
-import colors from '../../styles/colors'
-import fonts from '../../styles/fonts'
+import React from 'react';
+import { StyleSheet, Text, View } from "react-native";
+import { Feather } from '@expo/vector-icons';
+import { Review } from "../../core/types/Movie";
+import colors from '../../styles/colors';
+import fonts from '../../styles/fonts';
 
 type Props = {
-  review: Review
+  review: Review;
 }
 
 export default function ListReview({ review }: Props) {
@@ -22,7 +21,6 @@ export default function ListReview({ review }: Props) {
           { review.user.name }
         </Text>
       </View>
-
       <View style={ styles.reviewTextContainer }>
         <Text style={ styles.reviewText }>
           { review.text }

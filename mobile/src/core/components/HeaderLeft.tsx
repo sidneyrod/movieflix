@@ -6,66 +6,65 @@ import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
 export default function HeaderLeft() {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    return (
-        <View style={styles.headerLeftContainer}>
-            {navigation.canGoBack() && (
-                <TouchableOpacity
-                    activeOpacity={0.3}
-                    style={styles.headerBackImageContainer}
-                    onPress={() => navigation.goBack()}
-                >
-                    <Feather
-                        name='chevron-left'
-                        style={styles.headerBackImage}
-                    />
-                </TouchableOpacity>
-            )}
-
-            <Text
-                style={navigation.canGoBack() ? styles.headerLeftTextWithoutImage : styles.headerLeftText}
-            >
-                MovieFlix
-            </Text>
-        </View>
-    )
+  return (
+    <View style={ styles.headerLeftContainer }>
+      {navigation.canGoBack() && (
+        <TouchableOpacity
+          activeOpacity={ 0.3 }
+          style={ styles.headerBackImageContainer }
+          onPress={ () => navigation.goBack() }
+        >
+          <Feather
+            name='chevron-left'
+            style={ styles.headerBackImage }
+          />
+        </TouchableOpacity>
+      )}
+      <Text
+        style={ navigation.canGoBack() ? styles.headerLeftTextWithoutImage : styles.headerLeftText }
+      >
+        MovieFlix
+      </Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    headerLeftContainer: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
+  headerLeftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
 
-    headerBackImageContainer: {
-        width: 18,
-        height: 18,
-        borderRadius: 9,
-        backgroundColor: colors.black,
-        marginLeft: 20
-    },
+  headerBackImageContainer: {
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: colors.black,
+    marginLeft: 20
+  },
 
-    headerBackImage: {
-        color: colors.yellow,
-        fontSize: 18
-    },
+  headerBackImage: {
+    color: colors.yellow,
+    fontSize: 18
+  },
 
-    headerLeftText: {
-        marginLeft: 45,
-        marginVertical: 15,
-        fontFamily: fonts.title,
-        fontSize: 18,
-        letterSpacing: -0.015,
-        color: colors.black
-    },
+  headerLeftText: {
+    marginLeft: 45,
+    marginVertical: 15,
+    fontFamily: fonts.title,
+    fontSize: 18,
+    letterSpacing: -0.015,
+    color: colors.black
+  },
 
-    headerLeftTextWithoutImage: {
-        marginLeft: 15,
-        marginVertical: 15,
-        fontFamily: fonts.title,
-        fontSize: 18,
-        letterSpacing: -0.015,
-        color: colors.black
-    }
+  headerLeftTextWithoutImage: {
+    marginLeft: 15,
+    marginVertical: 15,
+    fontFamily: fonts.title,
+    fontSize: 18,
+    letterSpacing: -0.015,
+    color: colors.black
+  }
 })
