@@ -9,7 +9,7 @@ import colors from "../styles/colors";
 export default function Movies() {
   const [movies, setMovies] = useState<Movie[]>();
   const [page, setPage] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [genre, setGenre] = useState<Genre>();
 
@@ -76,9 +76,9 @@ export default function Movies() {
             )}
             numColumns={1}
             showsVerticalScrollIndicator={false}
-            onEndReachedThreshold={0.1} // 0.1 --> Quando o usuário chegar a 10% do final da tela
+            onEndReachedThreshold={0.1}
             onEndReached={({ distanceFromEnd }) => loadMore(distanceFromEnd)}
-            ListFooterComponent={isLoadingMore ? <ActivityIndicator color={colors.yellow} /> : <></>}
+            ListFooterComponent={ isLoadingMore ? <ActivityIndicator style={{marginBottom: 20}} color={ colors.yellow } /> : <></> }
           />
         </>
       )}
@@ -91,5 +91,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: colors.darkGray,
     paddingHorizontal: 20,
+    paddingTop: 20
   },
 })
