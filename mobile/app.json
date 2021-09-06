@@ -17,16 +17,19 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.sid.movieflix",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.sid.movieflix",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "description": "",
+    "githubUrl": "https://github.com/sidneyrod/movieflix"
   }
 }
