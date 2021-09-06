@@ -58,9 +58,15 @@ If you want, you can also create your own account. By default, new accounts crea
 - HTML / CSS / TypeScript
 - ReactJS
 
+## Mobile
+- HTML / CSS / TypeScript
+- React Native
+- Expo
+
 ## Deployment into production
 - Backend: Heroku
 - Frontend: Netlify
+- Mobile: Expo
 - Database: Postgresql
 
 # How to run the project
@@ -75,7 +81,7 @@ git clone git@github.com:sidneyrod/movieflix.git
 # enter back end project folder
 cd backend
 
-# run the project
+# run project
 ./mvnw spring-boot:run
 ```
 
@@ -93,9 +99,24 @@ cd frontend
 npm install
 yarn
 
-# run the project
+# run project
 npm start
 yarn start
+```
+## Mobile
+```bash
+# clone repository
+git clone git@github.com:sidneyrod/movieflix.git
+
+# enter mobile project folder
+cd mobile
+
+# install dependencies
+npm install
+yarn
+
+# run project
+expo start
 ```
 
 # Author
