@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CreateAccount, Home, Login, MovieDetails, Movies } from '../screens';
-import { Text } from 'react-native';
 import { isAuthenticated } from '../core/utils/auth';
 import HeaderLeft from '../core/components/HeaderLeft';
 import HeaderRight from '../core/components/HeaderRight';
@@ -11,16 +10,16 @@ import colors from '../styles/colors';
 const Stack = createStackNavigator();
 
 export default async function Routes() {
-  const { isUserLogged } = useContext(AuthContext)
+  const { isUserLogged } = useContext(AuthContext);
 
   async function checkIsUserLogged() {
-    const isLogged = await isAuthenticated()
-    return isLogged
+    const isLogged = await isAuthenticated();
+    return isLogged;
   }
 
   useEffect(() => {
-    checkIsUserLogged()
-  }, [isUserLogged])
+    checkIsUserLogged();
+  }, [isUserLogged]);
 
   return (
     <>
