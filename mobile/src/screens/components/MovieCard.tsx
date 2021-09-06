@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         height: 450,
         backgroundColor: colors.mediumGray,
         borderRadius: 10,
-        marginVertical: 20,
+        marginBottom: 20
     },
 
     image: {
