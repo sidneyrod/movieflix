@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { CreateAccount, Home, Login, MovieDetails, Movies } from '../screens';
 import { Text } from 'react-native';
 import { isAuthenticated } from '../core/utils/auth';
-import HeaderBackImage from '../core/components/HeaderBackImage';
 import HeaderLeft from '../core/components/HeaderLeft';
 import HeaderRight from '../core/components/HeaderRight';
 import { AuthContext } from '../contexts/AuthContext';
@@ -30,7 +29,6 @@ export default async function Routes() {
           screenOptions={{
             headerTitle: '',
             headerStyle: { backgroundColor: colors.yellow },
-            headerBackImage: () => <HeaderBackImage />,
             headerLeft: () => <HeaderLeft />,
             headerRight: () => <HeaderRight />
           }}
@@ -49,7 +47,6 @@ export default async function Routes() {
           screenOptions={{
             headerTitle: '',
             headerStyle: { backgroundColor: colors.yellow },
-            headerBackImage: () => <HeaderBackImage />,
             headerLeft: () => <HeaderLeft />
           }}
         >

@@ -19,30 +19,27 @@ export default function MovieDetails({ route: { params: { movieId } } }) {
   }, [])
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+    >
       <View style={styles.cardContainer}>
         <Image
           source={{ uri: movie?.imgUrl }}
           style={styles.movieImage}
         />
-
         <View style={styles.movieInfoContainer}>
           <Text style={styles.movieTitle}>
             {movie?.title}
           </Text>
-
           <Text style={styles.movieYear}>
             {movie?.year}
           </Text>
-
           <Text style={styles.movieSubtitle}>
             {movie?.subTitle}
           </Text>
-
           <Text style={styles.movieSynopseText}>
             Sinopse
           </Text>
-
           <ScrollView
             style={styles.movieSynopseContainer}
             showsVerticalScrollIndicator={false}
@@ -57,7 +54,6 @@ export default function MovieDetails({ route: { params: { movieId } } }) {
       {movie?.reviews.length !== 0 && (
         <ScrollView style={styles.reviewContainer}>
           <Text style={styles.reviewContainerTitle}>Avaliações</Text>
-
           {movie?.reviews.map(review => (
             <ListReview key={review.id} review={review} />
           ))}
