@@ -121,5 +121,5 @@ expo start
 
 # Author
 
-<p className="text-light">Developed by <a href="https://github.com/sidneyrod" 
+<p className="text-light">Developed by <a href="https://www.linkedin.com/in/sidney-rodrigues-6305b0148/" 
 target="_blank" rel="noreferrer">Sidney Rodrigues</a></p>
